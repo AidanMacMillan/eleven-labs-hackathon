@@ -1,0 +1,16 @@
+import {jsonb, pgTable, serial} from "drizzle-orm/pg-core";
+import {relations} from "drizzle-orm";
+import {scenarios} from "./scenarios";
+
+export const conversations = pgTable("conversations", {
+    id: serial("id").primaryKey(),
+    scenarioId: serial("scenario_id"),
+    messageHistory: jsonb("message_history").$type<{ role: string; content: string }[]>().default([]).notNull(),
+});
+
+export const conversationsRelations = relations(conversations, ({one}) => ({
+    scenario: one(scenarios, {
+        fields: [conversations.scenarioId],
+        references: [scenarios.id]
+    })
+}));

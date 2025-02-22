@@ -41,8 +41,11 @@
 		"vitest": "^3.0.0"
 	},
 	"dependencies": {
+		"@11labs/client": "^0.0.7",
 		"@langchain/core": "^0.3.40",
 		"@langchain/google-genai": "^0.1.8",
+		"drizzle-orm": "^0.39.3",
+		"elevenlabs": "^1.51.0",
 		"hono": "^4.7.2",
 		"langchain": "^0.3.19",
 		"openai": "^4.85.3"
