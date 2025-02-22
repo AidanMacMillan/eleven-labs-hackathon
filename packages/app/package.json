@@ -44,6 +44,7 @@
 		"@langchain/core": "^0.3.40",
 		"@langchain/google-genai": "^0.1.8",
 		"hono": "^4.7.2",
-		"langchain": "^0.3.19"
+		"langchain": "^0.3.19",
+		"openai": "^4.85.3"
 	}
 }
