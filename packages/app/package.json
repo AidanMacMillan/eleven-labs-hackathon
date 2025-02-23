@@ -49,6 +49,7 @@
 		"elevenlabs": "^1.51.0",
 		"hono": "^4.7.2",
 		"langchain": "^0.3.19",
-		"openai": "^4.85.3"
+		"openai": "^4.85.3",
+		"pusher-js": "^8.4.0"
 	}
 }

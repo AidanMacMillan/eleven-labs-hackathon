@@ -5,6 +5,7 @@ import {eq} from "drizzle-orm";
 import {ChatGoogleGenerativeAI} from "@langchain/google-genai";
 import {ChatPromptTemplate} from "@langchain/core/prompts";
 import {MessageHistory} from "drizzle/src/schema/conversations.ts";
+import {pusher} from "../pusher.ts";
 
 const model = new ChatGoogleGenerativeAI({
     model: 'gemini-2.0-flash',
@@ -42,19 +43,16 @@ export async function checkTasks(data: Jobs['check-tasks']) {
             case 'completion':
                 taskPromises.push((async () => {
                      scores[index] = await checkCompletionTask(conversation.messageHistory, task.description);
-                     console.log(index, scores[index]);
                 })());
                 break;
             case 'progress':
                 taskPromises.push((async () => {
                     scores[index] = await checkProgressTask(conversation.messageHistory, task.description, task.metricParams?.maxProgressSteps ?? 0);
-                    console.log(index, scores[index]);
                 })());
                 break;
             case 'percentage':
                 taskPromises.push((async () => {
                     scores[index] = await checkPercentageTask(conversation.messageHistory, task.description, conversation.taskScores[index - 1] ?? 0);
-                    console.log(index, scores[index]);
                 })());
                 break;
             default:
@@ -66,6 +64,9 @@ export async function checkTasks(data: Jobs['check-tasks']) {
     await Promise.all(taskPromises);
 
     if (scores.length > 0 || scores.length !== conversation.taskScores.length) {
+        pusher.trigger(`conversations-${data.conversationId}`, 'scores:updated', {
+            scores
+        });
         await db.update(schema.conversations).set({
             taskScores: scores
         }).where(eq(schema.conversations.id, data.conversationId));

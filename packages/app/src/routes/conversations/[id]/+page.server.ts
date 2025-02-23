@@ -16,12 +16,14 @@ export const load: PageServerLoad = async ({ params }) => {
 					backgroundImageUrl: true,
 					visualEffect: true,
 					voice: true,
-					language: true
+					language: true,
+					tasks: true
 				}
 			}
 		},
 		columns: {
-			id: true
+			id: true,
+			taskScores: true
 		}
 	});
 	if (!conversation) {

@@ -18,7 +18,8 @@
     "bullmq": "^5.41.5",
     "drizzle": "workspace:*",
     "drizzle-orm": "^0.39.3",
-    "langchain": "^0.3.19"
+    "langchain": "^0.3.19",
+    "pusher": "^5.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9",
