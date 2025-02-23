@@ -18,7 +18,7 @@
 	let audioElement: HTMLAudioElement;
 
 	useFirstInteract(() => {
-		audioElement.volume = 0.5;
+		audioElement.volume = 0.25;
 		audioElement.play();
 	});
 

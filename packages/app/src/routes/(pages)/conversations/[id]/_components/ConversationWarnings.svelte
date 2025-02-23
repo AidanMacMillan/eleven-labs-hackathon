@@ -12,14 +12,14 @@
 	});
 
 	let orderedGroupedWarningsDesc = $derived.by(() => {
-		warnings.toSorted((a, b) => {
-			return a.messageIndex - b.messageIndex;
+		const sortedWarnings = warnings.toSorted((a, b) => {
+			return b.messageIndex - a.messageIndex;
 		});
 
 		let index = -1;
 		let currentMessageIndex = -1;
 		const groupedWarnings: (typeof warnings)[] = [];
-		for (const warning of warnings) {
+		for (const warning of sortedWarnings) {
 			if (warning.messageIndex !== currentMessageIndex) {
 				index++;
 				currentMessageIndex = warning.messageIndex;

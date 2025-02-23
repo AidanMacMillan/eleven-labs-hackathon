@@ -2,10 +2,12 @@ import {Queue, Worker} from 'bullmq';
 import {checkTasks} from "./jobs/checkTasks";
 import {Queues} from "./queues";
 import {checkUserGrammar} from "./jobs/checkUserGrammar.ts";
+import {collectDictionaryElementsForMessages} from "./jobs/collectDictionaryElementsForMessages.ts";
 
 export type Jobs = {
     'check-tasks': { conversationId: number }
     'check-user-grammar': { conversationId: number, messageIndex: number }
+    'collect-dictionary-elements-for-messages': { conversationId: number, userMessageIndex: number, assistantMessageIndex: number }
 };
 
 const main = new Queue(Queues.MAIN, {
@@ -26,6 +28,11 @@ new Worker(Queues.MAIN, async job => {
     if (job.name === 'check-user-grammar') {
         const data = job.data as Jobs['check-user-grammar'];
         await checkUserGrammar(data);
+        return;
+    }
+    if (job.name === 'collect-dictionary-elements-for-messages') {
+        const data = job.data as Jobs['collect-dictionary-elements-for-messages'];
+        await collectDictionaryElementsForMessages(data);
         return;
     }
     console.warn('Unknown job');

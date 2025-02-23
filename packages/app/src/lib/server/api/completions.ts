@@ -116,6 +116,13 @@ export const completionsRouter = new Hono()
 				})
 			);
 			asyncPromises.push(main.add('check-tasks', { conversationId: conversation.id }));
+			asyncPromises.push(
+				main.add('collect-dictionary-elements-for-messages', {
+					conversationId: conversation.id,
+					userMessageIndex: currentHistory.length - 2,
+					assistantMessageIndex: currentHistory.length - 1
+				})
+			);
 
 			await Promise.all(asyncPromises);
 		});

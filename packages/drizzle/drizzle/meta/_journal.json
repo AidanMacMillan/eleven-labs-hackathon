@@ -36,6 +36,20 @@
       "when": 1740328890193,
       "tag": "0004_harsh_quasimodo",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1740337417649,
+      "tag": "0005_hard_meteorite",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1740343728583,
+      "tag": "0006_wooden_blur",
+      "breakpoints": true
     }
   ]
 }

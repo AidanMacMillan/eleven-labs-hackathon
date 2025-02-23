@@ -30,7 +30,6 @@ const grammarWarningsFormat = [
 ]
 
 export async function checkUserGrammar(data: Jobs['check-user-grammar']) {
-    console.log('checking user grammar', data);
     const conversation = await db.query.conversations.findFirst({
         where: eq(schema.conversations.id, data.conversationId),
         columns: {
@@ -39,10 +38,13 @@ export async function checkUserGrammar(data: Jobs['check-user-grammar']) {
         }
     });
 
+    if (!conversation) {
+        return;
+    }
+
     const userMessage = conversation.messageHistory[data.messageIndex];
 
-    console.log(userMessage);
-    if (!conversation || !userMessage) {
+    if (!userMessage) {
         return;
     }
 
@@ -61,7 +63,6 @@ export async function checkUserGrammar(data: Jobs['check-user-grammar']) {
 
     const parser = new JsonOutputParser<GrammarWarningResponse[]>();
     const parsed = await parser.parse(response.content as string);
-    console.log(parsed);
 
     if (!parsed || !parsed.length) {
         return;
