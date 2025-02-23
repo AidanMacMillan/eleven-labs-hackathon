@@ -24,6 +24,17 @@
 			customLlmExtraBody: {
 				conversationId: data.conversation.id
 			},
+			overrides: {
+				agent: {
+					prompt: {
+						prompt: data.conversation.scenario.description
+					},
+					language: data.conversation.scenario.language as any
+				},
+				tts: {
+					voiceId: data.conversation.scenario.voice
+				}
+			},
 			onMessage: (message) => {
 				console.log(message);
 			},

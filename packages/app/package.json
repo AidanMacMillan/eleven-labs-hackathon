@@ -44,6 +44,7 @@
 		"@11labs/client": "^0.0.7",
 		"@langchain/core": "^0.3.40",
 		"@langchain/google-genai": "^0.1.8",
+		"bullmq": "^5.41.5",
 		"drizzle-orm": "^0.39.3",
 		"elevenlabs": "^1.51.0",
 		"hono": "^4.7.2",

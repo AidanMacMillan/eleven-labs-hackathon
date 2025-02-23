@@ -1,0 +1,34 @@
+name: eleven-labs-hackathon
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  soketi:
+    image: quay.io/soketi/soketi:1.0-16-alpine
+    environment:
+      SOKETI_DEFAULT_APP_ID: soketi
+      SOKETI_DEFAULT_APP_KEY: soketi
+      SOKETI_DEFAULT_APP_SECRET: soketi
+    ports:
+      - 6001:6001
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+
+volumes:
+  pgdata:
+  redis-data:

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@drizzle/*": ["packages/drizzle/src/*"],
+      "@queue/*": ["packages/queue/src/*"]
+    },
+    "outDir": "./dist"
+  },
+  "include": ["packages/**/*"],
+  "exclude": ["node_modules"]
+}

@@ -7,6 +7,7 @@ import type { ChatCompletionCreateParamsStreaming } from 'openai/resources/chat/
 import { HTTPException } from 'hono/http-exception';
 import { db, schema } from '$lib/server/db';
 import { eq } from 'drizzle-orm';
+import { main } from '$lib/server/queue';
 
 const openai = new OpenAI({
 	apiKey: GEMINI_API_KEY,
@@ -96,5 +97,7 @@ export const completionsRouter = new Hono()
 					messageHistory: currentHistory
 				})
 				.where(eq(schema.conversations.id, conversation.id));
+
+			await main.add('check-tasks', { conversationId: conversation.id });
 		});
 	});

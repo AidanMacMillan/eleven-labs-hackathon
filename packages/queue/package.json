@@ -1,0 +1,29 @@
+{
+  "name": "queue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --watch",
+    "dev": "tsx --env-file .env src/main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/core": "^0.3.40",
+    "@langchain/google-genai": "^0.1.8",
+    "bullmq": "^5.41.5",
+    "drizzle": "workspace:*",
+    "drizzle-orm": "^0.39.3",
+    "langchain": "^0.3.19"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}
