@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageProps } from '../$types';
-	import { usePusher } from '$lib/frontend/composables/usePusher.svelte';
+	import { usePusher } from '$lib/frontend/composables/usePusher.svelte.js';
 	import { BadgeCheckIcon, BadgeXIcon } from 'lucide-svelte';
 
 	const { conversation }: { conversation: PageProps['data']['conversation'] } = $props();

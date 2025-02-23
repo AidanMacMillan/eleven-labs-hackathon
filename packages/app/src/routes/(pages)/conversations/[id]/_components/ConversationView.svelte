@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { useFirstInteract } from '$lib/frontend/composables/useFirstInteract.svelte';
+	import { useFirstInteract } from '$lib/frontend/composables/useFirstInteract.svelte.js';
 	import type { PageProps } from '../$types';
-	import { usePusher } from '$lib/frontend/composables/usePusher.svelte';
-	import { TypewriterEffect } from '$lib/frontend/composables/useTypewriterEffect.svelte';
+	import { usePusher } from '$lib/frontend/composables/usePusher.svelte.js';
+	import { TypewriterEffect } from '$lib/frontend/composables/useTypewriterEffect.svelte.js';
 	import ConversationTasks from './ConversationTasks.svelte';
 	import ToggleButton from '$lib/frontend/components/ToggleButton.svelte';
 	import { AudioLinesIcon, CaptionsIcon, ChevronLeft } from 'lucide-svelte';

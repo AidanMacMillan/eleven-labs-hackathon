@@ -1,5 +1,4 @@
 <script lang="ts">
-	import './conversations.css';
 	import type { PageProps } from './$types';
 	import ConversationView from './_components/ConversationView.svelte';
 
@@ -7,3 +6,9 @@
 </script>
 
 <ConversationView conversation={data.conversation} />
+
+<style>
+	:global(html, body) {
+		height: 100%;
+	}
+</style>
