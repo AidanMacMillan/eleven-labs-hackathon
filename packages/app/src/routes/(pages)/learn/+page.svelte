@@ -2,6 +2,7 @@
 	import Card from '$lib/frontend/components/Card.svelte';
 	import type { PageProps } from './$types';
 	import { ClipboardListIcon, InfoIcon, OctagonXIcon, TriangleAlertIcon } from 'lucide-svelte';
+	import Flag from '$lib/frontend/components/Flag.svelte';
 
 	const { data }: { data: PageProps } = $props();
 
@@ -49,6 +50,15 @@
 		}
 
 		return byType;
+	}
+
+	function laguageToCountryCode(language: string) {
+		switch (language) {
+			case 'en':
+				return 'US';
+			default:
+				return language;
+		}
 	}
 </script>
 
@@ -114,7 +124,23 @@
 <h2 class="mb-4 text-lg font-semibold">Start a New Conversation</h2>
 <div class="mb-8 grid gap-3 sm:grid-cols-[repeat(auto-fill,minmax(18rem,1fr))]">
 	{#each data.scenarios as scenario}
-		{scenario.name}
+		<a href="/conversations/new/{scenario.id}" class="group">
+			<Card class="flex h-40 items-center justify-center gap-4 px-4 py-2">
+				<div
+					class="background-image absolute inset-0 -z-10 bg-cover bg-center opacity-50 blur-xs transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75"
+					style:background-image="url('{scenario.backgroundImageUrl}')"
+				></div>
+				<div class="flex flex-col gap-1">
+					<div class="font-bold">{scenario.name}</div>
+					<div class="text-sm font-light opacity-75">{scenario.description}</div>
+					<div class="flex items-center gap-1 text-sm text-white/75">
+						3 <ClipboardListIcon class="h-4 w-4" />
+						<div class="mx-1 h-4 w-[1px] bg-white/75"></div>
+						<Flag size="sm" countryCode={laguageToCountryCode(scenario.language)} />
+					</div>
+				</div>
+			</Card>
+		</a>
 	{/each}
 </div>
 

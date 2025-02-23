@@ -32,7 +32,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 			name: true,
 			description: true,
 			backgroundImageUrl: true,
-			avatarImageUrl: true
+			avatarImageUrl: true,
+			language: true
 		}
 	});
 
