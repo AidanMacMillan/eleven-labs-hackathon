@@ -17,13 +17,17 @@ export const load: PageServerLoad = async ({ params }) => {
 					visualEffect: true,
 					voice: true,
 					language: true,
-					tasks: true
+					tasks: true,
+					avatarImageUrl: true,
+					ambientAudioUrl: true,
+					persona: true
 				}
 			}
 		},
 		columns: {
 			id: true,
-			taskScores: true
+			taskScores: true,
+			messageHistory: true
 		}
 	});
 	if (!conversation) {

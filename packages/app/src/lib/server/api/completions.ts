@@ -8,6 +8,7 @@ import { HTTPException } from 'hono/http-exception';
 import { db, schema } from '$lib/server/db';
 import { eq } from 'drizzle-orm';
 import { main } from '$lib/server/queue';
+import { pusher } from '$lib/server/pusher';
 
 const openai = new OpenAI({
 	apiKey: GEMINI_API_KEY,
@@ -76,12 +77,20 @@ export const completionsRouter = new Hono()
 				content: ''
 			};
 
+			const asyncPromises = [];
+
 			for await (const chunk of chatStream) {
-				if (chunk.choices[0].delta.role === 'assistant') {
+				if (chunk.choices[0].delta.role === 'assistant' && chunk.choices[0].delta.content) {
 					assistantMessage.content += chunk.choices[0].delta.content;
 				}
 
 				await stream.write(`data: ${JSON.stringify(chunk)}\n\n`);
+
+				asyncPromises.push(
+					pusher.trigger(`conversations-${conversation.id}`, 'assistant-message', {
+						content: assistantMessage.content
+					})
+				);
 			}
 
 			const currentHistory = conversation.messageHistory;
@@ -91,13 +100,17 @@ export const completionsRouter = new Hono()
 			});
 			currentHistory.push(assistantMessage);
 
-			await db
-				.update(schema.conversations)
-				.set({
-					messageHistory: currentHistory
-				})
-				.where(eq(schema.conversations.id, conversation.id));
+			asyncPromises.push(
+				db
+					.update(schema.conversations)
+					.set({
+						messageHistory: currentHistory
+					})
+					.where(eq(schema.conversations.id, conversation.id))
+			);
 
-			await main.add('check-tasks', { conversationId: conversation.id });
+			asyncPromises.push(main.add('check-tasks', { conversationId: conversation.id }));
+
+			await Promise.all(asyncPromises);
 		});
 	});
