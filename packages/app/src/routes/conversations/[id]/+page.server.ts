@@ -27,7 +27,8 @@ export const load: PageServerLoad = async ({ params }) => {
 		columns: {
 			id: true,
 			taskScores: true,
-			messageHistory: true
+			messageHistory: true,
+			grammarWarnings: true
 		}
 	});
 	if (!conversation) {

@@ -109,6 +109,12 @@ export const completionsRouter = new Hono()
 					.where(eq(schema.conversations.id, conversation.id))
 			);
 
+			asyncPromises.push(
+				main.add('check-user-grammar', {
+					conversationId: conversation.id,
+					messageIndex: currentHistory.length - 2
+				})
+			);
 			asyncPromises.push(main.add('check-tasks', { conversationId: conversation.id }));
 
 			await Promise.all(asyncPromises);

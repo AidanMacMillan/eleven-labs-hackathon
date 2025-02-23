@@ -7,11 +7,19 @@ export type MessageHistory = {
     content: string;
 }[];
 
+type GrammarWarnings = {
+    name: string;
+    description: string;
+    level: 'info' | 'warning' | 'error';
+    messageIndex: number;
+};
+
 export const conversations = pgTable("conversations", {
     id: serial("id").primaryKey(),
     scenarioId: serial("scenario_id"),
     messageHistory: jsonb("message_history").$type<MessageHistory>().default([]).notNull(),
     taskScores: jsonb("task_scores").$type<number[]>().default([]).notNull(),
+    grammarWarnings: jsonb("grammar_warnings").$type<GrammarWarnings[]>().default([]).notNull(),
 });
 
 export const conversationsRelations = relations(conversations, ({one}) => ({

@@ -45,12 +45,14 @@ export class TypewriterEffect {
 
 		const commonPrefix = this.commonPrefixLength(this.currentTarget, target);
 
-		this.changes.push(
-			...this.currentTarget
-				.slice(commonPrefix)
-				.split('')
-				.map((_) => null)
-		);
+		if (commonPrefix < this.currentTarget.length) {
+			this.changes.push(
+				...this.currentTarget
+					.slice(commonPrefix)
+					.split('')
+					.map((_) => null)
+			);
+		}
 		this.changes.push(...target.slice(commonPrefix).split(''));
 
 		if (this.changes.filter((change) => change === null).length > 20) {

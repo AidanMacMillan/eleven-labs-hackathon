@@ -1,0 +1,1 @@
+ALTER TABLE "conversations" ADD COLUMN "grammar_warnings" jsonb DEFAULT '[]'::jsonb NOT NULL;

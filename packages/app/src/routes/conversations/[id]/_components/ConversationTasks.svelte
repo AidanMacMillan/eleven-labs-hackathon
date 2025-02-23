@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageProps } from '../$types';
 	import { usePusher } from '$lib/frontend/composables/usePusher.svelte';
-	import { BadgeCheckIcon, BadgeXIcon, CheckIcon } from 'lucide-svelte';
+	import { BadgeCheckIcon, BadgeXIcon } from 'lucide-svelte';
 
 	const { conversation }: { conversation: PageProps['data']['conversation'] } = $props();
 
@@ -40,19 +40,21 @@
 					<div class="font-semibold">
 						{task.name}
 					</div>
-					{#if task.metric === 'completion'}
-						{#if (scores[index] ?? 0) === 1}
-							<div class="text-green-500">Completed</div>
-						{:else}
-							<div class="text-red-500">Not Completed</div>
+					<div class="text-sm font-light opacity-75">
+						{#if task.metric === 'completion'}
+							{#if (scores[index] ?? 0) === 1}
+								<div class="text-green-500">Completed</div>
+							{:else}
+								<div class="text-red-500">Not Completed</div>
+							{/if}
+						{:else if task.metric === 'progress'}
+							<div>
+								Progress: {scores[index] ?? 0}/{task.metricParams?.maxProgressSteps ?? 0}
+							</div>
+						{:else if task.metric === 'percentage'}
+							<div>Percentage Complete: {scores[index] ?? 0}%</div>
 						{/if}
-					{:else if task.metric === 'progress'}
-						<div>
-							Progress: {scores[index] ?? 0}/{task.metricParams?.maxProgressSteps ?? 0}
-						</div>
-					{:else if task.metric === 'percentage'}
-						<div>Percentage Complete: {scores[index] ?? 0}%</div>
-					{/if}
+					</div>
 				</div>
 				<div
 					class="flex w-20 shrink-0 items-center justify-center transition-colors ease-in-out {isComplete
@@ -60,9 +62,9 @@
 						: 'bg-red-500'}"
 				>
 					{#if isComplete}
-						<BadgeCheckIcon class="h-8 w-8" />
+						<BadgeCheckIcon class="h-6 w-6" />
 					{:else}
-						<BadgeXIcon class="h-8 w-8" />
+						<BadgeXIcon class="h-6 w-6" />
 					{/if}
 				</div>
 			</div>

@@ -6,6 +6,7 @@ import {ChatGoogleGenerativeAI} from "@langchain/google-genai";
 import {ChatPromptTemplate} from "@langchain/core/prompts";
 import {MessageHistory} from "drizzle/src/schema/conversations.ts";
 import {pusher} from "../pusher.ts";
+import {getFriendlyMessageHistory} from "../shared/getFriendlyMessageHistory.ts";
 
 const model = new ChatGoogleGenerativeAI({
     model: 'gemini-2.0-flash',
@@ -64,24 +65,19 @@ export async function checkTasks(data: Jobs['check-tasks']) {
     await Promise.all(taskPromises);
 
     if (scores.length > 0 || scores.length !== conversation.taskScores.length) {
-        pusher.trigger(`conversations-${data.conversationId}`, 'scores:updated', {
-            scores
-        });
-        await db.update(schema.conversations).set({
-            taskScores: scores
-        }).where(eq(schema.conversations.id, data.conversationId));
+        const asyncPromises = [];
+        asyncPromises.push(
+            pusher.trigger(`conversations-${data.conversationId}`, 'scores:updated', {
+                scores
+            })
+        );
+        asyncPromises.push(
+            db.update(schema.conversations).set({
+                taskScores: scores
+            }).where(eq(schema.conversations.id, data.conversationId))
+        );
+        await Promise.all(asyncPromises);
     }
-}
-
-function getFriendlyMessageHistory(messageHistory: MessageHistory): string {
-    let messageHistoryFriendly = '';
-    messageHistory.forEach(message => {
-        if (message.role !== 'user' && message.role !== 'assistant') {
-            return;
-        }
-        messageHistoryFriendly += `${message.role}: ${message.content}\n\n`;
-    });
-    return messageHistoryFriendly;
 }
 
 async function checkCompletionTask(messageHistory: MessageHistory, taskDescription: string): Promise<number> {
