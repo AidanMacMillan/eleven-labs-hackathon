@@ -5,7 +5,11 @@
 <div
 	class="pointer-events-auto absolute top-0 left-0 flex h-20 w-full items-center justify-between px-6"
 >
-	<div class="z-10 hidden text-xl font-black tracking-widest sm:block">CONVERSE</div>
+	<div class="z-10 hidden text-xl font-black sm:block">
+		<span class="fancy-text bg-clip-text tracking-wider">LINGUA</span><span class="font-normal"
+			>CONVERSE</span
+		>
+	</div>
 	<div class="flex grow items-center justify-between gap-0 sm:grow-0 sm:justify-normal sm:gap-16">
 		<Flag countryCode="JP" />
 		<div class="flex items-center gap-4">
@@ -19,3 +23,12 @@
 		/>
 	</div>
 </div>
+
+<style>
+	.fancy-text {
+		background: linear-gradient(155deg, #ff00ff, #8300ff);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+</style>

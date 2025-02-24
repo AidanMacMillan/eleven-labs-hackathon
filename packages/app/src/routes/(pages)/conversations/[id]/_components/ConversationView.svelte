@@ -45,7 +45,7 @@
 	});
 
 	async function startConversation() {
-		await Conversation.startSession({
+		let session = await Conversation.startSession({
 			signedUrl: signedUrl,
 			customLlmExtraBody: {
 				conversationId: conversation.id
@@ -76,11 +76,11 @@
 		class="background-image absolute inset-0 -z-10"
 		style:background-image="url('{conversation.scenario.backgroundImageUrl}')"
 	></div>
-	<video loop autoplay muted class="overlay-video absolute -z-10 h-full w-full object-cover">
-		<source
-			src="https://cdn.alchemyrpg.com/universe/6260df75b0b47dc841b01d56/assets/lrv15j1b.webm"
-		/>
-	</video>
+	{#if conversation.scenario.visualEffect}
+		<video loop autoplay muted class="overlay-video absolute -z-10 h-full w-full object-cover">
+			<source src={conversation.scenario.visualEffect} />
+		</video>
+	{/if}
 	<div class="vignette absolute inset-0 -z-10"></div>
 	<div class="absolute top-4 left-4 flex gap-2">
 		<a href="/learn">
@@ -109,7 +109,12 @@
 			{#if showSubtitles}
 				<div class="flex flex-col items-center px-8 py-24">
 					{#if typewriterEffect.currentValue.length > 0}
-						<div class="text-2xl font-bold text-orange-400">{conversation.scenario.persona}</div>
+						<div
+							class="text-2xl font-bold"
+							style:color={conversation.scenario.accentColor ?? 'white'}
+						>
+							{conversation.scenario.persona}
+						</div>
 						<p class="text-center text-xl font-light text-white">
 							<span class="font-light tracking-wide">{typewriterEffect.currentValue}</span>
 						</p>

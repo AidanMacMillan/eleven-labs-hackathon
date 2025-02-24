@@ -20,7 +20,8 @@ export const load: PageServerLoad = async ({ params }) => {
 					tasks: true,
 					avatarImageUrl: true,
 					ambientAudioUrl: true,
-					persona: true
+					persona: true,
+					accentColor: true
 				}
 			}
 		},

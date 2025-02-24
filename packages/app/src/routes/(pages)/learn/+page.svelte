@@ -70,14 +70,9 @@
 		src="https://images.unsplash.com/photo-1528164344705-47542687000d?q=80&w=3584&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 		alt=""
 	/>
-	<video loop autoplay muted class="overlay-video absolute -z-10 h-full w-full object-cover">
-		<source
-			src="https://cdn.alchemyrpg.com/universe/6260df75b0b47dc841b01d56/assets/lrv15j1b.webm"
-		/>
-	</video>
 	<div class="bottom-gradient absolute inset-0 -z-10"></div>
 	<div class="fade-in relative text-center text-lg font-bold tracking-wider">
-		Master New Languages Faster and Smarter
+		Master New Languages. Faster. Smarter.
 	</div>
 </Card>
 
@@ -130,9 +125,9 @@
 					class="background-image absolute inset-0 -z-10 bg-cover bg-center opacity-50 blur-xs transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:opacity-75"
 					style:background-image="url('{scenario.backgroundImageUrl}')"
 				></div>
-				<div class="flex flex-col gap-1">
+				<div class="flex flex-col gap-1.5">
 					<div class="font-bold">{scenario.name}</div>
-					<div class="text-sm font-light opacity-75">{scenario.description}</div>
+					<div class="line-clamp-2 text-sm font-light opacity-75">{scenario.description}</div>
 					<div class="flex items-center gap-1 text-sm text-white/75">
 						3 <ClipboardListIcon class="h-4 w-4" />
 						<div class="mx-1 h-4 w-[1px] bg-white/75"></div>
@@ -147,10 +142,6 @@
 <style>
 	.bottom-gradient {
 		background: linear-gradient(to top, rgba(255, 100, 150, 0.25) 0%, rgba(255, 100, 150, 0) 200px);
-	}
-
-	.overlay-video {
-		opacity: 0.25;
 	}
 
 	.fade-in {
@@ -179,7 +170,7 @@
 		100% {
 			opacity: 1;
 			filter: blur(0px);
-			top: 0px;
+			top: 0;
 		}
 	}
 </style>

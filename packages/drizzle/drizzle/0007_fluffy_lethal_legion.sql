@@ -1,0 +1,1 @@
+ALTER TABLE "scenarios" ADD COLUMN "accent_color" text;

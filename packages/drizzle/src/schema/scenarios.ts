@@ -19,4 +19,5 @@ export const scenarios = pgTable("scenarios", {
     voice: text("voice_id").notNull(),
     language: text("language_id").notNull(),
     tasks: jsonb("tasks").$type<ScenarioTask[]>().default([]).notNull(),
+    accentColor: text("accent_color"),
 });

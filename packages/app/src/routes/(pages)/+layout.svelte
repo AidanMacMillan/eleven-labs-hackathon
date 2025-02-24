@@ -7,7 +7,7 @@
 
 <div class="background fixed inset-0 -z-10"></div>
 
-<div class="pointer-events-none fixed inset-0">
+<div class="pointer-events-none fixed inset-0 z-10">
 	<div class="background background-overlay absolute inset-0 -z-10"></div>
 	<Navbar />
 	<Header />
