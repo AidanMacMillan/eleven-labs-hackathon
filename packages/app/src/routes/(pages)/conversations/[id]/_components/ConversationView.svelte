@@ -45,7 +45,7 @@
 	});
 
 	async function startConversation() {
-		let session = await Conversation.startSession({
+		await Conversation.startSession({
 			signedUrl: signedUrl,
 			customLlmExtraBody: {
 				conversationId: conversation.id

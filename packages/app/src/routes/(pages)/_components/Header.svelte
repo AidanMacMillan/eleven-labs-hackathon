@@ -6,8 +6,8 @@
 	class="pointer-events-auto absolute top-0 left-0 flex h-20 w-full items-center justify-between px-6"
 >
 	<div class="z-10 hidden text-xl font-black sm:block">
-		<span class="fancy-text bg-clip-text tracking-wider">LINGUA</span><span class="font-normal"
-			>CONVERSE</span
+		<span class="fancy-text bg-clip-text tracking-wider">LINGUA</span><span
+			class="font-normal text-white/85">CONVERSE</span
 		>
 	</div>
 	<div class="flex grow items-center justify-between gap-0 sm:grow-0 sm:justify-normal sm:gap-16">
