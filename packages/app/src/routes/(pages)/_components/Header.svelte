@@ -26,7 +26,7 @@
 
 <style>
 	.fancy-text {
-		background: linear-gradient(155deg, #ff00ff, #8300ff);
+		background: linear-gradient(155deg, #d668d6, #8e53cc);
 		background-clip: text;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;

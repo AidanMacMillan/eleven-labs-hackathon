@@ -56,8 +56,10 @@
 		switch (language) {
 			case 'en':
 				return 'US';
+			case 'ja':
+				return 'JP';
 			default:
-				return language;
+				return language.toUpperCase();
 		}
 	}
 </script>
@@ -117,7 +119,10 @@
 </div>
 
 <h2 class="mb-4 text-lg font-semibold">Start a New Conversation</h2>
-<div class="mb-8 grid gap-3 sm:grid-cols-[repeat(auto-fill,minmax(18rem,1fr))]">
+<div
+	class="mb-8 grid gap-3 sm:grid-cols-[repeat(auto-fill,minmax(18rem,1fr))]"
+	data-sveltekit-preload-data="false"
+>
 	{#each data.scenarios as scenario}
 		<a href="/conversations/new/{scenario.id}" class="group">
 			<Card class="flex h-40 items-center justify-center gap-4 px-4 py-2">
@@ -129,7 +134,8 @@
 					<div class="font-bold">{scenario.name}</div>
 					<div class="line-clamp-2 text-sm font-light opacity-75">{scenario.description}</div>
 					<div class="flex items-center gap-1 text-sm text-white/75">
-						3 <ClipboardListIcon class="h-4 w-4" />
+						{scenario.tasks.length}
+						<ClipboardListIcon class="h-4 w-4" />
 						<div class="mx-1 h-4 w-[1px] bg-white/75"></div>
 						<Flag size="sm" countryCode={laguageToCountryCode(scenario.language)} />
 					</div>

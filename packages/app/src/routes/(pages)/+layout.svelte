@@ -13,7 +13,7 @@
 	<Header />
 </div>
 
-<div class="pt-24 sm:pt-20 sm:pl-16">
+<div class="pt-24 pb-20 sm:pt-20 sm:pb-0 sm:pl-16">
 	<div class="px-6 sm:px-12">
 		{@render children()}
 	</div>

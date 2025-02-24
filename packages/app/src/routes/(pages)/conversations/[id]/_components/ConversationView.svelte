@@ -129,7 +129,7 @@
 	</div>
 </div>
 <audio loop bind:this={audioElement}>
-	<source src="/restaurant.mp3" type="audio/mpeg" />
+	<source src={conversation.scenario.ambientAudioUrl} type="audio/mpeg" />
 </audio>
 
 <style>
@@ -141,7 +141,7 @@
 	}
 
 	.overlay-video {
-		opacity: 0.25;
+		opacity: 0.4;
 	}
 
 	.vignette {

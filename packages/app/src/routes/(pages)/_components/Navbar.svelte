@@ -26,7 +26,7 @@
 		},
 		{
 			name: 'Conversations',
-			href: '/dictionary',
+			href: '/dictionary/en',
 			icon: BookAIcon,
 			isActive: () => {
 				return page.url.pathname.startsWith('/dictionary/') || page.url.pathname === '/dictionary';
